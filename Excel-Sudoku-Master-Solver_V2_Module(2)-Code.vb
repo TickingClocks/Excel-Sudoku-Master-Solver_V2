@@ -1,4 +1,9 @@
 Option Explicit
+#If VBA7 Then
+    Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal ms As LongPtr)
+#Else
+    Private Declare Sub Sleep Lib "kernel32" (ByVal ms as Long)
+#End If
 'ensures board is valid
 Public Function ensureValid()
     
@@ -193,10 +198,6 @@ Public Function ensureValid()
     End If
     
 End Function
-
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
 'solves sudoku puzzle
 Public Function solvePuzzle()
     
@@ -208,6 +209,7 @@ Public Function solvePuzzle()
     Dim BACKTRACK As Boolean 'flag that code is running backwards through puzzle
     Dim backTracking As Boolean 'flad that code needs to continue backtracking
     Dim GOLD As Boolean 'used to determine previously placed number
+    Dim sloMo As Boolean 'slow motion activation
     
     Dim row As Integer 'current row position
     Dim col As Integer 'current column position
@@ -230,6 +232,16 @@ Public Function solvePuzzle()
     
     row = 2
     col = 1
+    
+    If (Range(Cells(6, 10), Cells(6, 14)).Interior.Color = vbGreen) Then 'SLO-MO TIME
+    
+        sloMo = True
+        
+    Else
+    
+        sloMo = False
+
+    End If
     
     Do While (row <= 10) 'move down 1 row
         
@@ -482,7 +494,7 @@ Public Function solvePuzzle()
                                 With Cells(row, col)
                                     .Value = 0
                                     .Font.Size = 37
-                                    .Font.Color = RGB(52, 131, 202)
+                                    .Font.Color = RGB(175, 95, 95)
                                 End With
                                 
                             Else
@@ -526,6 +538,12 @@ Public Function solvePuzzle()
                     
                 End If
                 
+            End If
+            
+            If (sloMo = True) Then 'PAUSE
+                
+                Sleep 50
+            
             End If
             
         Loop

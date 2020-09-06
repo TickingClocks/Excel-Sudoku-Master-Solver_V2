@@ -1,7 +1,3 @@
-''''''''''''''''''''''''''''''
-''''''''SHEET 1 CODE''''''''''
-''''''''''''''''''''''''''''''
-
 Option Explicit
 'Clears Spreadsheet
 Public Sub clear_Click()
@@ -9,8 +5,6 @@ Public Sub clear_Click()
     Call clearSheet
     
 End Sub
-
-'''''''''''''''''''''''''''''''''''''''''
 
 Private Sub CommandButton1_Click()
 
@@ -20,7 +14,20 @@ Private Sub CommandButton1_Click()
     
 End Sub
 
-''''''''''''''''''''''''''''''''''''''''''''''
+Private Sub sloMo_Click()
+
+    If (Range(Cells(6, 10), Cells(6, 14)).Interior.Color = vbGreen) Then 'change red
+    
+        Range(Cells(6, 10), Cells(6, 14)).Interior.Color = vbRed
+        
+    Else 'change green
+        
+        Range(Cells(6, 10), Cells(6, 14)).Interior.Color = vbGreen
+        
+    End If
+
+    
+End Sub
 
 'Solves the Sudoku
 Private Sub solve_Click()
