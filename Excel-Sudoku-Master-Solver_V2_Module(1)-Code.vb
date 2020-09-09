@@ -3,9 +3,6 @@ Option Explicit
 Public FAIL As Boolean
 Public genMsg As Integer
 Public valMsg As Boolean
-
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
 'Main Function
 Public Function runSolve()
 
@@ -30,9 +27,6 @@ Public Function runSolve()
     '''''''''''''''''''''''''
 
 End Function
-
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
 'Clears Spreadsheet
 Public Function clearSheet()
     

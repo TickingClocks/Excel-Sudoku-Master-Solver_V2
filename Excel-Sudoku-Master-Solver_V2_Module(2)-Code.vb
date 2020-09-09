@@ -29,6 +29,12 @@ Public Function ensureValid()
         col = 1 'reset column
         Do While (col <= 9) 'move down one row
         
+            If (col = 9) Then
+            
+                col = 9
+                
+            End If
+        
             current = CInt(Cells(row, col)) 'look at current value
             
             If (current = 0) Then 'blank cell - SKIP
@@ -225,6 +231,7 @@ Public Function solvePuzzle()
     Dim j As Integer 'used for loop check 3x3 square
     Dim v As Integer 'used for finding valid cell for backtracking
     Dim fontSize As Integer 'used to tell if code is backtracking
+    Dim slow As Integer
     
     SKIP = False
     BACKTRACK = False
@@ -232,6 +239,14 @@ Public Function solvePuzzle()
     
     row = 2
     col = 1
+
+    slow = CInt(Range("O11").Value)
+    
+    If (slow = 0) Then 'revert to default
+    
+        slow = 10
+        
+    End If
     
     If (Range(Cells(6, 10), Cells(6, 14)).Interior.Color = vbGreen) Then 'SLO-MO TIME
     
@@ -255,6 +270,10 @@ Public Function solvePuzzle()
             
                 GOLD = True
                 
+            Else
+            
+                GOLD = False
+            
             End If
             
             If (current <> 0) And (BACKTRACK <> True) Then 'not blank space or backtracking - SKIP
@@ -274,7 +293,8 @@ Public Function solvePuzzle()
                     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                     
                     If (GOLD <> True) Then 'keep moving back through puzzle until spot is found
-                    
+                        
+                        v = 1
                         Do While (v <= 81) 'how many placements we can go back
                         
                             ''''STEP BACK THROUGH CODE UNTIL CELL IS FOUND THAT IS GOLD = True''''
@@ -294,12 +314,16 @@ Public Function solvePuzzle()
                                 Else
                                     
                                     'check if valid space
-                                    fontSize = CInt(Cells(col, row).Font.Size)
+                                    fontSize = CInt(Cells(row, col).Font.Size)
                                     
                                     If (fontSize = 39) Then 'gold space - VALID
                                     
                                         GOLD = True
                                         
+                                    Else
+                                    
+                                        GOLD = False
+                                    
                                     End If
                                     
                                 End If
@@ -310,20 +334,26 @@ Public Function solvePuzzle()
                                 col = col - 1
                                 
                                 'check if valid
-                                fontSize = CInt(Cells(col, row).Font.Size)
+                                fontSize = CInt(Cells(row, col).Font.Size)
                                 
                                 If (fontSize = 39) Then 'gold space - VALID
                                 
                                     GOLD = True
                                     
+                                Else
+                                
+                                    GOLD = False
+                                
                                 End If
                                 
                             End If
                                     
                             If (GOLD = True) Then 'found valid space
                             
-                                Exit Do
                                 try = CInt(Cells(row, col)) + 1
+                                BACKTRACK = False
+                                backTracking = False
+                                Exit Do
                                 
                             Else 'try next space back
                                 
@@ -336,6 +366,8 @@ Public Function solvePuzzle()
                     Else 'CURRENT CELL VALID FOR BACKTRACKING - TRY NEXT NUMBER
                 
                         try = CInt(Cells(row, col)) + 1
+                        BACKTRACK = False
+                        backTracking = False
                         'reset backTracking
                         
                     End If
@@ -344,6 +376,12 @@ Public Function solvePuzzle()
                     
                         backTracking = True
                         BACKTRACK = True
+                        
+                        With Cells(row, col)
+                            .Value = 0
+                            .Font.Size = 36
+                            .Font.Color = RGB(175, 95, 95)
+                        End With
                         
                     Else
                     
@@ -472,8 +510,8 @@ Public Function solvePuzzle()
                                 .Font.Size = 39
                             End With
                             
-                            'reset backtrack
-                            BACKTRACK = False
+                            'PRETTY SURE I DONT NEED THIS
+                            'BACKTRACK = False
                             
                             Exit Do 'dont try any more numbers
                             
@@ -484,16 +522,16 @@ Public Function solvePuzzle()
                             
                             If (try = 10) Then 'HERE IS WHERE I WILL NEED TO IMPLEMENT BACKTRACKING
                             'IF try = 10 THEN ALL NUMBERS HAVE BEEN TRIED AND WE NEED TO GO BACK TO
-                            'OUR LAST CHOICE TO TRY A DIFFERENT CHOICE. WHEN A CHOICE IS MADE THE FONT
+                            'OUR LAST CHOICE TO TRY A DIFFERENT NUMBER. WHEN A CHOICE IS MADE THE FONT
                             'SIZE IS CHANGED. I'VE USED THIS AS A FLAG TO TELL ME IF I CAN CHANGE A
-                            'NUMBER IN THE CELL BASED ON FONT SIZE
+                            'NUMBER IN THE CELL BASED ON FONT SIZE - TRACKED WITH THE 'GOLD' BOOLEAN
                             
                                 BACKTRACK = True
                                 
                                 'reset current cell to 0
                                 With Cells(row, col)
                                     .Value = 0
-                                    .Font.Size = 37
+                                    .Font.Size = 36
                                     .Font.Color = RGB(175, 95, 95)
                                 End With
                                 
@@ -542,7 +580,7 @@ Public Function solvePuzzle()
             
             If (sloMo = True) Then 'PAUSE
                 
-                Sleep 50
+                Sleep slow
             
             End If
             
