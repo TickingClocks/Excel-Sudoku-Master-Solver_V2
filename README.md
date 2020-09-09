@@ -1,5 +1,5 @@
 # Excel-Sudoku-Master-Solver_V2
-Excel spreadsheet that will solve any valid sudoku puzzle. 
+This Excel spreadsheet will solve any valid sudoku puzzle. 
 
 I created this spreadsheet so that I could visually see my algorithm solve any sudoku puzzle.
 
