@@ -261,12 +261,15 @@ Public Function solvePuzzle()
     Dim fontSize As Integer 'used to tell if code is backtracking
     Dim slow As Integer
     
+    Dim attempt As Long
+    
     SKIP = False
     BACKTRACK = False
     backTracking = False
     
     row = 2
     col = 1
+    attempt = 0
 
     slow = CInt(Range("O11").Value)
     
@@ -538,8 +541,8 @@ Public Function solvePuzzle()
                                 .Font.Size = 39
                             End With
                             
-                            'PRETTY SURE I DONT NEED THIS
-                            'BACKTRACK = False
+                            'counts how many numbers were tried
+                            attempt = attempt + 1
                             
                             Exit Do 'dont try any more numbers
                             
@@ -621,5 +624,7 @@ Public Function solvePuzzle()
         End If
         
     Loop
+    
+    genMsg = MsgBox("SUCCESS!!" + vbNewLine + "The algorithm placed " + CStr(Format(attempt, "#,###")) + " different numbers to come to this solution.", vbOKOnly, "SUCCESS")
 
 End Function
