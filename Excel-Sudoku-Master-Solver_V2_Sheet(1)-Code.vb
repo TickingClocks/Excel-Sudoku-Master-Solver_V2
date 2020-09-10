@@ -1,11 +1,11 @@
 Option Explicit
-'Clears Spreadsheet
+'Clear button
 Public Sub clear_Click()
         
     Call clearSheet
     
 End Sub
-
+'Validate Button
 Private Sub CommandButton1_Click()
 
     valMsg = True
@@ -13,22 +13,23 @@ Private Sub CommandButton1_Click()
     Call ensureValid
     
 End Sub
-
+'SLO-MO button
 Private Sub sloMo_Click()
 
     If (Range(Cells(6, 10), Cells(6, 14)).Interior.Color = vbGreen) Then 'change red
     
         Range(Cells(6, 10), Cells(6, 14)).Interior.Color = vbRed
+        Range("O11").Interior.Color = vbRed
         
     Else 'change green
         
         Range(Cells(6, 10), Cells(6, 14)).Interior.Color = vbGreen
+        Range("O11").Interior.Color = vbGreen
         
     End If
 
     
 End Sub
-
 'Solves the Sudoku
 Private Sub solve_Click()
 

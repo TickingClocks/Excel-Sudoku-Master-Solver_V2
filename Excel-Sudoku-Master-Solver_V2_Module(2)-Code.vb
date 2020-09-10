@@ -15,25 +15,20 @@ Public Function ensureValid()
     Dim xCheck As Integer 'check row
     Dim yCheck As Integer 'check column
     Dim sqCheck As Integer 'check 3x3 block
-    Dim D As Integer
-    Dim x As Integer
-    Dim y As Integer
-    Dim k As Integer
-    Dim j As Integer
+    Dim D As Integer 'used to check row/column
+    Dim x As Integer 'used to check 3x3 square
+    Dim y As Integer 'used to check 3x3 square
+    Dim k As Integer 'used to check 3x3 square
+    Dim j As Integer 'used to check 3x3 square
     
     SKIP = False
+    FAIL = False
     
     row = 2 'starts row 1
-    Do While (row <= 10) 'move one over one column
+    Do While (row <= 10) 'move down one column
         
         col = 1 'reset column
-        Do While (col <= 9) 'move down one row
-        
-            If (col = 9) Then
-            
-                col = 9
-                
-            End If
+        Do While (col <= 9) 'move over one column
         
             current = CInt(Cells(row, col)) 'look at current value
             
@@ -65,6 +60,16 @@ Public Function ensureValid()
                             
                                 FAIL = True
                                 SKIP = True
+                                
+                                'turn font red for failed numbers
+                                With Cells(row, D)
+                                    .Font.Color = vbRed
+                                End With
+                                
+                                With Cells(row, col)
+                                    .Font.Color = vbRed
+                                End With
+                                
                                 D = 10
                                 
                             Else
@@ -100,6 +105,16 @@ Public Function ensureValid()
                             
                                 FAIL = True
                                 SKIP = True
+                                
+                                'turn font red for failed numbers
+                                With Cells(D, col)
+                                    .Font.Color = vbRed
+                                End With
+                                
+                                With Cells(row, col)
+                                    .Font.Color = vbRed
+                                End With
+                                
                                 D = 11
                                 
                             Else
@@ -119,7 +134,9 @@ Public Function ensureValid()
                 ''''''''''''''''''''''''''''''''''''''
                 
                 If (SKIP <> True) Then
-                
+                    
+                    'feed in coordinates (row, col) and get top left
+                    'cell coordinates of the current 3x3 block (x, y)
                     y = 3 * Int((row - 2) / 3) + 2
                     x = 3 * Int((col - 1) / 3) + 1
                     
@@ -142,6 +159,16 @@ Public Function ensureValid()
                                 
                                     FAIL = True
                                     SKIP = True
+                                    
+                                    'turn font red for failed numbers
+                                    With Cells(y, x)
+                                        .Font.Color = vbRed
+                                    End With
+                                    
+                                    With Cells(row, col)
+                                        .Font.Color = vbRed
+                                    End With
+                                    
                                     j = 4
                                     k = 4
                                     
@@ -194,6 +221,7 @@ Public Function ensureValid()
         
     Else
         
+        'only displays if this function is called from the "VALIDATE" button
         If (valMsg = True) Then 'display valid message
         
             'display success message

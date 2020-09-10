@@ -22,7 +22,11 @@ Public Function runSolve()
     ''''find solution'''''''
     ''''''''''''''''''''''''
     
-    Call solvePuzzle
+    If (FAIL <> True) Then
+        
+        Call solvePuzzle
+        
+    End If
     
     '''''''''''''''''''''''''
 
