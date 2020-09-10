@@ -1,0 +1,78 @@
+Expert Level Puzzle Observations:
+	1. few numbers: 23
+	2. appear to be randomly generated and randomly placed
+	
+	
+Procedure:
+	1. Get expert level puzzle from sudoku.com
+	2. see how many different numbers it takes to solve the puzzle.
+	3. remove low numbers and only keep 23 (same number as baseline)
+	   all numbers will be the highest value until I reach 23 numbers
+	4. run algorithm and see how many numbers it takes for just high numbers
+	5. start fresh with the beginning puzzle (baseline) and resolve.
+	6. remove high numbers and only keep 23 (same number as baseline)
+	   all numbers will be the lowest value until I reach 23 numbers
+	7. run algorithm to see how many numbers it takes for just the low numbers
+	8. compare/record results
+	9. repeat
+	
+	
+	I'm only looking at numbers and if their value affects the numbert of attempts it
+	takes to solve the puzzle. I am not keeping track of position in puzzle
+	
+Baseline Expert Puzzle
+	1. Puzzle 1
+		starting numbers: 2, 7, 8, 5, 8, 3, 1, 9, 1, 7, 9, 6, 2, 8, 4, 7, 1, 8, 3, 7, 4, 5, 2,
+		attempts: 48,488
+		
+	2. Puzzle 2
+		starting numbers:
+		attmepts:
+		
+	3. Puzzle 3
+		starting numbers:
+		attempts:
+		
+	4. Puzzle 4
+		starting numbers:
+		attempts:
+		
+	5. Puzzle 5
+		starting numbers:
+		attempts:
+		
+		
+		
+High Numbers Only
+	1. Puzzle 1
+		attempts: 72
+		
+	2. Puzzle 2
+		attmepts:
+		
+	3. Puzzle 3
+		attempts:
+		
+	4. Puzzle 4
+		attempts:
+		
+	5. Puzzle 5
+		attempts:
+		
+		
+		
+Low Numbers Only
+	1. Puzzle 1
+		attempts: 109
+		
+	2. Puzzle 2
+		attmepts:
+		
+	3. Puzzle 3
+		attempts:
+		
+	4. Puzzle 4
+		attempts:
+		
+	5. Puzzle 5
+		attempts:
