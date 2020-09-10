@@ -24,7 +24,7 @@ Public Function ensureValid()
     SKIP = False
     FAIL = False
     
-    row = 2 'starts row 1
+    row = 2 'starts row 2
     Do While (row <= 10) 'move down one column
         
         col = 1 'reset column

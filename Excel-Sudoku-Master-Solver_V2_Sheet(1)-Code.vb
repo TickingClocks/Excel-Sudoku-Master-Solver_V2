@@ -8,8 +8,32 @@ End Sub
 'Validate Button
 Private Sub CommandButton1_Click()
 
+    Dim k As Integer
+    Dim j As Integer
+
+    '''''reset font size and color''''
+    
+    k = 2
+    Do While (k <= 10)
+        
+        j = 1
+        Do While (j <= 9)
+        
+            Cells(k, j).Font.Size = 36
+            Cells(k, j).Font.Color = RGB(52, 131, 202)
+            
+            j = j + 1
+            
+        Loop
+        
+        k = k + 1
+        
+    Loop
+    
+    'display valid board message
     valMsg = True
     
+    'check if board is valid
     Call ensureValid
     
 End Sub
